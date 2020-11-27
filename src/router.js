@@ -24,7 +24,7 @@ class AppRouter extends Component {
                 <Layout>
                     <Sider className="site-layout-background" width={200}>
                         <Menu
-                            collapsed={false}
+                            collapsed="false"
                             mode="inline"
                             theme="dark"
                             defaultSelectedKeys={['41']}

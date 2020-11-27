@@ -27,6 +27,10 @@ module.exports = merge(baseWebpackConfig, {
         publicPath: '/',
         proxy: {
             // 接口请求代理
+            '/api': {
+                target:"http://localhost:3001",
+                secure: false
+            }
         },
     },
 });
