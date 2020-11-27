@@ -14,8 +14,9 @@ class Store {
     ];
 
     @action
-    fetchUserList() {
-        return this.userList;
+    async fetchUserList() {
+        const res = await fetch('/api/test/profile');
+        this.userList = (await res.json()).list;
     }
 }
 

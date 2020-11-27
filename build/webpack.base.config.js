@@ -95,7 +95,7 @@ module.exports = {
             patterns: [
                 {
                     from: utils.resolve('../src/assets/css'),
-                    to: utils.resolve('../dist'),
+                    to: utils.resolve('../dist/static/css'),
                     globOptions: {
                         ignore: ['.*']
                     }
