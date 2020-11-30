@@ -20,8 +20,8 @@ class Store {
         this.userList = data.list || [];
     }
 
-    addUser() {
-        http.put('/user/add');
+    addUser(params) {
+        http.put('/user/add', params);
     }
 }
 

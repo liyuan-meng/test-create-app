@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react';
 import { computed, action } from 'mobx';
-import { Form, Input, Button } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import Store from '../store';
 
 @observer
@@ -14,13 +14,9 @@ class AddUserPage extends React.Component {
    }
 
     @action.bound
-    onFinish(values) {
-        console.log('Success:', values);
-    };
-
-    @action.bound
-    onFinishFailed(errorInfo) {
-        console.log('Failed:', errorInfo);
+    async onFinish(values) {
+        await this.store.addUser(values);
+        message.success('success!');
     };
 
     render() {
@@ -47,7 +43,6 @@ class AddUserPage extends React.Component {
                     remember: true,
                 }}
                 onFinish={this.onFinish}
-                onFinishFailed={this.onFinishFailed}
             >
                 <Form.Item
                     label="Username"
