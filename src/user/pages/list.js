@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { action } from 'mobx';
-import { Button, Table } from 'antd';
+import { Button, message, Table } from 'antd';
 import Store from '../store';
 
 @observer
@@ -27,7 +27,9 @@ class UserListPage extends React.Component {
     }
 
     @action.bound
-    handleAddUser() {
+    async handleAddUser() {
+        await this.store.addUser();
+        message.success('success!');
         this.props.history.push('/user/add');
     }
 

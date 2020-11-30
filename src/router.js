@@ -46,8 +46,8 @@ class AppRouter extends Component {
                         <Content className="site-layout-background">
                             <Switch>
                                 {
-                                    ROUTER_CONFIG.reverse().map((item, index) =>
-                                        <Route key={index} path={item.path} component={item.component}/>
+                                    ROUTER_CONFIG.reverse().map(item =>
+                                        <Route key={item.id} path={item.path} component={item.component}/>
                                     )
                                 }
                             </Switch>

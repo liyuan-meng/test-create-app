@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx';
+import http from '../../utils/http';
 
 class Store {
     @observable
@@ -15,8 +16,12 @@ class Store {
 
     @action
     async fetchUserList() {
-        const res = await fetch('/api/test/profile');
-        this.userList = (await res.json()).list;
+        const { data } = await http.get('/user/list');
+        this.userList = data.list || [];
+    }
+
+    addUser() {
+        http.put('/user/add');
     }
 }
 
