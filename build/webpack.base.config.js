@@ -1,5 +1,6 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const EndWebpackPlugin = require('./plugins/end-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const utils = require('./utils');
 
 module.exports = {
@@ -12,13 +13,9 @@ module.exports = {
     output: {
         path: utils.resolve('../dist'),
         filename: 'js/[name].[hash].js',
+        chunkFilename: utils.assetsPath("js/[name].[chunkhash].js"),
         publicPath: '/' // 给生成的静态资源路径添加前缀
     },
-
-    // resolveLoader: {
-    //     // 去哪些目录下寻找 Loader，有先后顺序之分
-    //     modules: ['node_modules', './loaders/'],
-    // },
 
     // 模块
     module: {
@@ -30,20 +27,13 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use:[
-                    {
-                        loader: 'style-loader', // 创建 <style></style>
-                    },
-                    {
-                        loader: 'css-loader',  // 转换 css
-                    }
-                ]
+                use:[MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
                 test: /\.less$/,
                 use: [
                     {
-                        loader: 'style-loader',
+                        loader: MiniCssExtractPlugin.loader
                     },
                     {
                         loader: 'css-loader',
@@ -101,6 +91,10 @@ module.exports = {
                     }
                 }
             ]
+        }),
+        new MiniCssExtractPlugin({
+            filename: utils.assetsPath('css/[name].[hash].css'),
+            chunkFilename: utils.assetsPath('css/[id].[chunkhash].css'),
         }),
         // test plugin
         new EndWebpackPlugin(() => {

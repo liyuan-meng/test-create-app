@@ -1,7 +1,11 @@
 import React from 'react'
 import { Route } from 'react-router-dom';
-import AddUserPage from './pages/add';
-import UserListPage from './pages/list';
+import loadable from '../../utils/loadable';
+const AddUserPage = loadable(import('./pages/add'));
+const UserListPage = loadable(import('./pages/list'));
+
+// import AddUserPage from './pages/add';
+// import UserListPage from './pages/list';
 
 class User extends React.Component {
     render(){

@@ -27,8 +27,8 @@ class AppRouter extends Component {
                             collapsed="false"
                             mode="inline"
                             theme="dark"
-                            defaultSelectedKeys={['41']}
-                            defaultOpenKeys={['4']}
+                            defaultSelectedKeys={['1']}
+                            defaultOpenKeys={['1']}
                             style={{ height: '100%' }}
                         >
                             {ROUTER_CONFIG.map(item => (
