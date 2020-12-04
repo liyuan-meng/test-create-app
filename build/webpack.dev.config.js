@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.config');
 const utils = require('./utils');
+const { targetConfig } = require('./api-domain');
 
 module.exports = merge(baseWebpackConfig, {
     // 指定构建环境
@@ -23,12 +24,11 @@ module.exports = merge(baseWebpackConfig, {
         hot: true, // 开启热更新
         contentBase: false, // contentBase 是用来指定被访问 html 页面所在目录；
         compress: true, // 一切服务都启用 gzip 压缩：
-        port: 8081, // 指定端口
         publicPath: '/',
         proxy: {
             // 接口请求代理
             '/api': {
-                target:"http://localhost:3001",
+                target:targetConfig[process.env.NODE_ENV],
                 secure: false
             }
         },

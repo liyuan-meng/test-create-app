@@ -1,7 +1,10 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const EndWebpackPlugin = require('./plugins/end-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 const utils = require('./utils');
+const { apiDomain } = require('./api-domain');
+const mode = process.env.NODE_ENV;
 
 module.exports = {
     // 入口
@@ -75,7 +78,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json'], // 解析扩展。（当我们通过路导入文件，找不到改文件时，会尝试加入这些后缀继续寻找文件）
         alias: {
-            '@src': utils.resolve('../src')
+            '@src': utils.resolve('../src'),
+            '@utils': utils.resolve('../utils')
         }
     },
 
@@ -95,6 +99,12 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: utils.assetsPath('css/[name].[hash].css'),
             chunkFilename: utils.assetsPath('css/[id].[chunkhash].css'),
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(mode),
+                BASE_URL: JSON.stringify(apiDomain[mode])
+            }
         }),
         // test plugin
         new EndWebpackPlugin(() => {

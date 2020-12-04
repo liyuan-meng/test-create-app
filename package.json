@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config build/webpack.prod.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js",
     "prestart": "echo \" this is pre start \"",
-    "start": "concurrently \"npm run mock\" \"webpack-dev-server --config build/webpack.dev.config.js\"",
+    "start": "cross-env NODE_ENV=development concurrently \"npm run mock\" \"webpack-dev-server --config build/webpack.dev.config.js\"",
     "poststart": "echo \" this is post start \"",
+    "start:qa": "cross-env NODE_ENV=qa webpack-dev-server --config build/webpack.dev.config.js",
     "server": "http-server -p 8080 dist/",
     "mock": "node mock/server.js"
   },
@@ -27,6 +28,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.3.0",
     "copy-webpack-plugin": "^6.3.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",

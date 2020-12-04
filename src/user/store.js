@@ -1,18 +1,9 @@
 import { action, observable } from 'mobx';
-import http from '../../utils/http';
+import http from '@utils/http';
 
 class Store {
     @observable
-    userList = [
-        {
-            name: '张三',
-            tel: '1312312453454'
-        },
-        {
-            name: '李四',
-            tel: '1312312453454'
-        }
-    ];
+    userList = [];
 
     @action
     async fetchUserList() {
